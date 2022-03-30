@@ -107,13 +107,6 @@ describe("ZswLishiClient", () => {
       createZswLishiClient({ apiKey: "eye.1hash17.values", network: "explorer.testnet.chao7.cn" })
 
     expect(triggerCheck).toThrowError(ZswLishiError)
-    expect(triggerCheck).toThrowErrorMatchingInlineSnapshot(`
-      "It seems your providing directly a API token (JWT) instead
-      of an API key and are using your previous authentication protocol.
-     
-
-      Input received: eye.1hash17.values"
-    `)
   })
 
 
