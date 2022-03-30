@@ -1,0 +1,102 @@
+{
+  "name": "zsw-lishi",
+  "version": "0.1.0",
+  "description": "中数文联盟链历史Client",
+  "sideEffects": false,
+  "main": "dist/lib/index.js",
+  "module": "dist/zsw-lishi.es5.js",
+  "browser": "dist/zsw-lishi.umd.js",
+  "typings": "dist/types/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "repository": "https://github.com/zhongshuwen/zsw-lishi-js",
+  "license": "MIT",
+  "scripts": {
+    "check": "yarn lint && yarn test && yarn build",
+    "prepublishOnly": "yarn build && yarn test",
+    "prebuild": "rimraf docs dist",
+    "build": "yarn run build:cjs && yarn run build:es && yarn run build:umd && yarn run build:docs",
+    "build:cjs": "tsc --module commonjs",
+    "build:es": "rollup -c rollup.config.es.js",
+    "build:umd": "rollup -c rollup.config.umd.js && node scripts/compress-umd-build.js",
+    "build:docs": "typedoc",
+    "publish:latest": "yarn publish --public && node scripts/gh-publish-docs.js",
+    "publish:next": "yarn publish --public --tag next",
+    "postversion": "node scripts/gh-push.js",
+    "lint": "eslint . --format=pretty --ext .js,.jsx,.ts,.tsx",
+    "lint:specific": "eslint . --format=pretty",
+    "start": "tsc --module commonjs --watch",
+    "run:example": "yarn run ts-node -O '{\"module\":\"commonjs\"}'",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "_comment": "Use --no-verify to bypass",
+      "pre-commit": "lint-staged && pretty-quick --staged",
+      "pre-push": "yarn lint"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "**/*.ts": [
+        "yarn lint:specific"
+      ]
+    },
+    "ignore": [
+      "**/*.d.ts"
+    ]
+  },
+  "devDependencies": {
+    "@types/dotenv": "^4.0.3",
+    "@types/jest": "^26.0.14",
+    "@types/jest-expect-message": "^1.0.2",
+    "@types/node-fetch": "^2.1.6",
+    "@types/ws": "^6.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "dotenv": "^6.1.0",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-formatter-pretty": "^4.0.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^24.0.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "graphql": "^14.5.3",
+    "graphql-tag": "^2.10.1",
+    "husky": "^1.1.2",
+    "jest": "^26.4.2",
+    "jest-expect-message": "^1.0.2",
+    "leaked-handles": "^5.2.0",
+    "lint-staged": "^7.3.0",
+    "node-fetch": "^2.3.0",
+    "patch-package": "^6.0.7",
+    "postinstall-postinstall": "^2.0.0",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.0.2",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.22.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-ignore": "^1.0.5",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "shelljs": "^0.8.3",
+    "terser": "^3.17.0",
+    "ts-jest": "^26.3.0",
+    "ts-node": "^7.0.1",
+    "typedoc": "^0.19.2",
+    "typedoc-default-themes-extension": "^0.0.3",
+    "typedoc-plugin-toc-group": "^0.0.4",
+    "typescript": "^4.0.2",
+    "ws": "^7.0.1"
+  },
+  "dependencies": {
+    "@types/debug": "^0.0.31",
+    "debug": "^4.1.0"
+  }
+}

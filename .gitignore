@@ -1,0 +1,31 @@
+# Autoenv/Direnv
+.env
+.envrc
+
+# Build
+/docs
+/dist
+
+# Coverage
+coverage/
+
+# NPM
+package-lock.json
+
+# Rollup
+.rpt2_cache
+
+# System Files
+*.orig
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/launch.json
+
+# Yarn
+yarn-error.log
+node_modules/
+
+# Webstorm
+.idea
